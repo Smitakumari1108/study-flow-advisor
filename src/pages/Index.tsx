@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -24,9 +23,9 @@ const Index = () => {
   });
 
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedLevel, setSelectedLevel] = useState('');
-  const [priceFilter, setPriceFilter] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all_categories');
+  const [selectedLevel, setSelectedLevel] = useState('all_levels');
+  const [priceFilter, setPriceFilter] = useState('all_prices');
   const [recommendationEngine] = useState(() => new RecommendationEngine(mockCourses));
   const [showTrending, setShowTrending] = useState(false);
 
@@ -49,10 +48,10 @@ const Index = () => {
 
     // Apply filters
     return courses.filter(course => {
-      if (selectedCategory && course.category !== selectedCategory) return false;
-      if (selectedLevel && course.level !== selectedLevel) return false;
+      if (selectedCategory && selectedCategory !== 'all_categories' && course.category !== selectedCategory) return false;
+      if (selectedLevel && selectedLevel !== 'all_levels' && course.level !== selectedLevel) return false;
       
-      if (priceFilter) {
+      if (priceFilter && priceFilter !== 'all_prices') {
         switch (priceFilter) {
           case 'free':
             return course.price === 0;
@@ -112,9 +111,9 @@ const Index = () => {
   };
 
   const clearFilters = () => {
-    setSelectedCategory('');
-    setSelectedLevel('');
-    setPriceFilter('');
+    setSelectedCategory('all_categories');
+    setSelectedLevel('all_levels');
+    setPriceFilter('all_prices');
     setSearchQuery('');
     setShowTrending(false);
   };

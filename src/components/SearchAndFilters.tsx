@@ -54,7 +54,7 @@ const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
               <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all_categories">All Categories</SelectItem>
               {categories.map(category => (
                 <SelectItem key={category} value={category}>{category}</SelectItem>
               ))}
@@ -66,7 +66,7 @@ const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
               <SelectValue placeholder="Level" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Levels</SelectItem>
+              <SelectItem value="all_levels">All Levels</SelectItem>
               <SelectItem value="Beginner">Beginner</SelectItem>
               <SelectItem value="Intermediate">Intermediate</SelectItem>
               <SelectItem value="Advanced">Advanced</SelectItem>
@@ -78,7 +78,7 @@ const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
               <SelectValue placeholder="Price" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Prices</SelectItem>
+              <SelectItem value="all_prices">All Prices</SelectItem>
               <SelectItem value="free">Free</SelectItem>
               <SelectItem value="paid">Paid</SelectItem>
               <SelectItem value="under50">Under $50</SelectItem>
@@ -112,19 +112,19 @@ const SearchAndFilters: React.FC<SearchAndFiltersProps> = ({
         <div className="flex flex-wrap gap-2 mt-4">
           {selectedCategory && (
             <Badge variant="secondary" className="flex items-center gap-1">
-              Category: {selectedCategory}
+              Category: {selectedCategory === 'all_categories' ? 'All Categories' : selectedCategory}
               <X className="w-3 h-3 cursor-pointer" onClick={() => onCategoryChange('')} />
             </Badge>
           )}
           {selectedLevel && (
             <Badge variant="secondary" className="flex items-center gap-1">
-              Level: {selectedLevel}
+              Level: {selectedLevel === 'all_levels' ? 'All Levels' : selectedLevel}
               <X className="w-3 h-3 cursor-pointer" onClick={() => onLevelChange('')} />
             </Badge>
           )}
           {priceFilter && (
             <Badge variant="secondary" className="flex items-center gap-1">
-              Price: {priceFilter}
+              Price: {priceFilter === 'all_prices' ? 'All Prices' : priceFilter}
               <X className="w-3 h-3 cursor-pointer" onClick={() => onPriceFilterChange('')} />
             </Badge>
           )}
